@@ -108,3 +108,23 @@ let b:current_syntax = "markdown"
 
 delcommand HtmlHiLink
 " vim: tabstop=2
+
+" fold region for headings
+syn region mkdHeaderFold
+    \ start="^\s*\z(#\+\)"
+    \ skip="^\s*\z1#\+"
+    \ end="^\(\s*#\)\@="
+    \ fold contains=TOP
+
+" fold region for references
+syn region mkdReferenceFold
+    \ start="^<!--\z(\S*\)-->"
+    \ end="^<!--END\z1-->"
+    \ fold contains=TOP
+
+" fold region for lists
+syn region mkdListFold
+    \ start="^\z(\s*\)\*\z(\s*\)"
+    \ skip="^\z1 \z2\s*[^#]"
+    \ end="^\(.\)\@="
+    \ fold contains=TOP
